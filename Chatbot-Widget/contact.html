@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Gavin Reid</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="navbar" class="nav">
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li> <a href="cv.html">CV</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li> <!-- Active class for contact -->
+    </ul>
+  </nav>
+
+  <div class="content">
+    <div class="card contact-card">
+      <h1>Contact Me</h1>
+      <p>If you have any questions or want to work with me, feel free to send a message!</p>
+
+      <form action="contact.php" method="post" class="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+    
+        <input type="submit" value="Send Message">
+    </form>
+    
+    </div>
+  </div>
+
+  <footer>
+    <p>Gavin John Reid</p>
+    <p>&copy 2024</p>
+  </footer>
+</body>
+</html>
