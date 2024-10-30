@@ -1,0 +1,12 @@
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run', 'deploy', 'cv-bot-actions',
+      '--image', 'gcr.io/$PROJECT_ID/cv_bot_actions:latest',
+      '--platform', 'managed',
+      '--region', 'europe-west1',
+      '--allow-unauthenticated',
+      '--memory', '1Gi',
+      '--timeout', '600'
+    ]

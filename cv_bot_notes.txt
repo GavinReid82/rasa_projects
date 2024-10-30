@@ -1,0 +1,50 @@
+*****************************************cv_bot_actions*****************************************
+
+https://custom-actions-292730212626.europe-west1.run.app
+
+
+1. 
+cd cv_bot_actions
+2. 
+docker build --platform linux/amd64 -t gcr.io/cvbot-438407/rasa-actions:latest .
+3.
+docker push gcr.io/cvbot-438407/rasa-actions:latest
+4.
+gcloud run deploy rasa-actions \
+    --image gcr.io/cvbot-438407/rasa-actions:latest \
+    --platform managed \
+    --region europe-west1 \
+    --allow-unauthenticated \
+    --memory 1Gi \
+    --timeout 900
+
+
+5. 
+gcloud builds submit
+
+
+
+
+*****************************************CV BOT*****************************************
+
+For testing only:
+	source .venv/bin/activate
+
+Dockerize and deploy:
+
+1. 
+cd cv_bot
+2. 
+docker build --platform linux/amd64 -t gcr.io/cvbot-438407/rasa-assistant:latest .
+3.
+docker push gcr.io/cvbot-438407/rasa-assistant:latest
+4.
+gcloud run deploy rasa-assistant \
+    --image gcr.io/cvbot-438407/rasa-assistant:latest \
+    --platform managed \
+    --region europe-west1 \
+    --allow-unauthenticated \
+    --memory 2Gi \
+    --timeout 900
+5. 
+gcloud builds submit
