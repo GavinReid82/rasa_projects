@@ -1,0 +1,73 @@
+actions:
+- utter_greet
+- action_give_info
+- utter_suggestion
+- utter_goodbye
+- utter_iamabot
+
+intents:
+- greet
+- ask_about
+- affirm
+- deny
+- ask_suggestion
+- bot_challenge
+- goodbye
+
+entities:
+  - category
+
+responses:
+
+  utter_greet:
+    - buttons:
+        - payload: '/ask_about{"category": "qualifications"}'
+          title: Tell me about Gavin's qualifications
+        - payload: '/ask_about{"category": "experience"}'
+          title: Tell me about Gavin's experience
+        - payload: '/ask_about{"category": "skills"}'
+          title: Tell me about Gavin's many skills
+      text: Hello! I'm here to help you navigate through Gavin's CV. What would you like to know?
+  
+  utter_goodbye:
+  - text: Goodbye! Feel free to reach out if you have more questions, or contact Gavin directly at gavinjohnreid@gmail.com.
+
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa and built by Gavin.
+
+  utter_suggestion:
+    - buttons:
+        - payload: '/ask_about{"category": "qualifications"}'
+          title: Qualifications
+        - payload: '/ask_about{"category": "experience"}'
+          title: Experience
+        - payload: '/ask_about{"category": "skills"}'
+          title: Skills
+        - payload: '/ask_about{"category": "personality"}'
+          title: Personality
+      text: 'You can ask about any of the following:'
+
+slots:
+  list_index:
+    type: float
+    initial_value: 0.0
+    influence_conversation: false  # Internal counter only, no direct input mappings
+    mappings: []  # Empty mappings array required for validation
+
+  category:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: category
+
+  previous_category:
+    type: text
+    influence_conversation: false  # Internal logic only, no impact on conversation flow
+    mappings: []  # Empty mappings array required for validation
+        
+session_config:
+  carry_over_slots_to_new_session: true
+  session_expiration_time: 60
+version: '3.1'
+

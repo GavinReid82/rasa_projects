@@ -1,0 +1,116 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - yes please
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: ask_suggestion
+  examples: |
+    - What should I ask next?
+    - Suggest something I should ask.
+    - Can you recommend a question?
+    
+- intent: ask_about
+  examples: |
+    - What is Gavin's [personality](category) like? 
+    - What is Gavin like [personality](category)?
+    - [personality](category)
+    - [Qualifications](category)
+    - [Experience](category)
+    - [Skills](category)
+    - Tell me about Gavin's [qualifications](category).
+    - Tell me about Gavin's [experience](category).
+    - Tell me about your [skills](category).
+    - Can you share your [qualifications](category)?
+    - I'd like to hear about your [experience](category).
+    - What [skills](category) do you have?
+    - Do you have any [qualifications](category)?
+    - Could you list your [skills](category)?
+    - Can you tell me about your [experience](category)?
+    - What is your [experience](category) in this field?
+    - Describe your [skills](category).
+    - What are your top [skills](category)?
+    - Can you give me an overview of your [experience](category)?
+    - What are your professional [qualifications](category)?
+    - Can you tell me about your work [experience](category)?
+    - What are your technical [skills](category)?
+    - Can you tell me about your [skills](category)?
+    - Tell me one of your [skills](category).
+   
+
+# - intent: ask_qualification
+#   examples: |
+#     - Tell me about your qualifications
+#     - What are your professional qualifications?
+#     - What degrees do you have?
+#     - What certifications do you hold?
+
+# - intent: ask_experience
+#   examples: |
+#     - experience
+#     - Can you tell me about your work experience?
+#     - What is your current role?
+#     - What roles have you held?
+#     - Tell me about your work history.
+
+# - intent: ask_skills
+#   examples: |
+#     - skills
+#     - What skills do you have?
+#     - What languages do you speak?
+#     - What programming languages do you know?
+#     - What are your technical skills?
+#     - Can you tell me about your skills?
+#     - Tell me one of your skills.

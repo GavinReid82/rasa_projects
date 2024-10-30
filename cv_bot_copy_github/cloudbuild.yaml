@@ -1,0 +1,13 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/cvbot-438407/cv-bot', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/cvbot-438407/cv-bot']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'cv-bot-api', '--image', 'gcr.io/cvbot-438407/cv-bot', '--region', 'europe-west1', '--platform', 'managed', '--memory', '2Gi', '--allow-unauthenticated']
+images:
+- gcr.io/cvbot-438407/cv-bot

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot UI with Buttons</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .chat-container { width: 400px; margin: 50px auto; border: 1px solid #ccc; padding: 10px; border-radius: 5px; }
+    .chat-box { height: 300px; overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px; padding: 10px; }
+    .input-box { display: flex; }
+    .input-box input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .input-box button { padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .input-box button:hover { background-color: #45a049; }
+    .message { padding: 10px; margin: 5px 0; border-radius: 5px; }
+    .user-message { background-color: #d1f2d1; text-align: right; }
+    .bot-message { background-color: #f1f1f1; }
+    .button-container { display: flex; gap: 5px; margin: 5px 0; }
+    .button { padding: 5px 10px; background-color: #008CBA; color: white; border: none; border-radius: 3px; cursor: pointer; }
+    .button:hover { background-color: #007bb5; }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-box">
+      <input type="text" id="userMessage" placeholder="Type your message here...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage(payload = null) {
+      let message;
+
+      // If the payload is passed (from button click), use it
+      if (payload) {
+        message = payload;
+      } else {
+        // Otherwise, take message from input box
+        message = document.getElementById('userMessage').value;
+        if (message === '') return;
+        
+        // Add user message to the chatbox
+        addMessageToChatBox(message, 'user-message');
+        // Clear input field
+        document.getElementById('userMessage').value = '';
+      }
+
+      // Send the message to the Rasa server
+      const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "sender": "user", "message": message })
+      });
+
+      const data = await response.json();
+
+      // Add bot response to the chatbox
+      if (data.length > 0) {
+        data.forEach((res) => {
+          if (res.text) {
+            addMessageToChatBox(res.text, 'bot-message');
+          }
+          if (res.buttons) {
+            addButtonsToChatBox(res.buttons);
+          }
+        });
+      }
+    }
+
+    function addMessageToChatBox(message, className) {
+      const chatBox = document.getElementById('chatBox');
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', className);
+      messageDiv.innerText = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+    }
+
+    function addButtonsToChatBox(buttons) {
+      const chatBox = document.getElementById('chatBox');
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add('button-container');
+      
+      buttons.forEach(button => {
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('button');
+        buttonElement.innerText = button.title;
+        buttonElement.onclick = function() {
+          // Send the button's payload as a message when clicked
+          sendMessage(button.payload);
+        };
+        buttonContainer.appendChild(buttonElement);
+      });
+
+      chatBox.appendChild(buttonContainer);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+    }
+  </script>
+</body>
+</html>

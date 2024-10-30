@@ -1,0 +1,27 @@
+version: "3.1"
+rules:
+
+- rule: provide information based on category
+  steps:
+    - intent: ask_about
+    - action: action_give_info
+
+- rule: affirm continuation
+  steps:
+    - intent: affirm
+    - action: action_give_info
+
+- rule: deny continuation
+  steps:
+    - intent: deny
+    - action: utter_suggestion
+
+- rule: challenge
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- rule: goodbye
+  steps: 
+    - intent: goodbye
+    - action: utter_goodbye

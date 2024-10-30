@@ -1,0 +1,20 @@
+stories:
+
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: user asks for suggestions
+  steps:
+  - intent: ask_suggestion
+  - action: utter_suggestion
+  - intent: ask_about
+  - action: action_give_info
+
+- story: goodbye path
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  
+version: '3.1'
